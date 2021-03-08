@@ -1,28 +1,39 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <v-app>
+        <div id="app" :style="appStyle">
+            <router-view />
+        </div>
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: "App",
+    metaInfo: {
+        // if no subcomponents specify a metaInfo.title, this title will be used
+        title: "Real-time Bidding",
+    },
+    computed: {
+        appStyle() {
+            return {
+                "--lightBlue": "#90d3ef",
+                "--regBlue": "#2e94cf",
+                "--midBlue": "#1080c5",
+                "--darkBlue": "#0e6396",
+                "--blueHover": "#f5f8fc",
+                "--layoutWidth": "1080px",
+            };
+        },
+    },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
 </style>
