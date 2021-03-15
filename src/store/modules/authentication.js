@@ -28,7 +28,7 @@ const actions = {
             );
 
             if (response) {
-                // set user profile  in state
+                // set user profile in state
                 dispatch("fetchProfile", response.user);
             } else {
                 console.log(response);
@@ -48,7 +48,7 @@ const actions = {
             commit("setUser", userProfile);
 
             if (router.currentRoute.path === "/login") {
-                router.push("/todo");
+                router.push("/");
             }
         } catch (e) {
             console.log(e);

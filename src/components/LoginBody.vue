@@ -170,7 +170,7 @@ export default {
     }
 
     &__error {
-        color: red;
+        color: var(--redError);
     }
 }
 </style>

@@ -27,38 +27,39 @@
                     active-class="active"
                     exact
                     to="/login"
+                    v-if="!this.auth.currentUser"
                 >
                     <span>Login</span>
                 </router-link>
-                <!-- <span
+                <span
                     class="HeaderView__logout"
                     v-if="this.auth.currentUser"
                     @click="handleLogout"
                 >
                     Logout
-                </span> -->
+                </span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-// import { auth } from "@/firebase";
-// import { mapActions } from "vuex";
+import { auth } from "@/firebase";
+import { mapActions } from "vuex";
 
 export default {
     name: "Header",
-    // data: () => {
-    //     return {
-    //         auth,
-    //     };
-    // },
-    // methods: {
-    //     ...mapActions(["logout"]),
-    //     handleLogout() {
-    //         this.logout();
-    //     },
-    // },
+    data: () => {
+        return {
+            auth,
+        };
+    },
+    methods: {
+        ...mapActions(["logout"]),
+        handleLogout() {
+            this.logout();
+        },
+    },
 };
 </script>
 

@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "firebase": "^8.2.10",
     "vue": "^2.6.11",
+    "vue-image-crop-upload": "^2.5.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0",
