@@ -7,7 +7,7 @@
         <v-btn small rounded @click="showUploader">Set Image</v-btn>
         <img-uploader
             field="img"
-            @crop-success="cropSuccess"
+            @crop-success="updateImgDataUrl"
             v-model="showImageUpload"
             :width="300"
             :height="300"
@@ -20,14 +20,13 @@
 
 <script>
 import myUpload from "vue-image-crop-upload";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
     name: "NewItemBody",
     data() {
         return {
             showImageUpload: false,
-
-            imgDataUrl: "",
         };
     },
     components: {
@@ -35,12 +34,13 @@ export default {
     },
 
     methods: {
+        ...mapMutations(["updateImgDataUrl"]),
         showUploader() {
             this.showImageUpload = !this.showImageUpload;
         },
-        cropSuccess(imgDataUrl) {
-            this.imgDataUrl = imgDataUrl;
-        },
+    },
+    computed: {
+        ...mapGetters(["imgDataUrl"]),
     },
 };
 </script>
@@ -56,6 +56,6 @@ export default {
     img {
         margin: auto;
     }
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 </style>

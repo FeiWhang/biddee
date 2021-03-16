@@ -27,7 +27,7 @@
                         :max="maxEndDate()"
                         v-if="showEndDatePicker"
                         v-model="endDate"
-                        color="#0e6396"
+                        color="#1080c5"
                         :no-title="true"
                         elevation="8"
                         width="308px"
@@ -58,7 +58,7 @@
                         v-model="endTime"
                         :min="minEndTime()"
                         type="month"
-                        color="#0e6396"
+                        color="#1080c5"
                         class="ml-4"
                         :no-title="true"
                         elevation="8"
@@ -78,20 +78,13 @@ export default {
             today: "",
             formattedToday: "",
             nowTime: "",
-            endDate: "",
             formattedEndDate: "",
             showEndDatePicker: false,
-            endTime: "",
             showEndTimePicker: false,
         };
     },
     created() {
         this.getCurrentDateTime();
-    },
-    watch: {
-        endDate(val) {
-            this.formattedEndDate = this.formatDate(val);
-        },
     },
     methods: {
         minEndDate() {
@@ -140,19 +133,38 @@ export default {
             this.showEndTimePicker = false;
         },
     },
+    computed: {
+        endDate: {
+            get() {
+                return this.$store.getters.endDate;
+            },
+            set(newEndDate) {
+                this.formattedEndDate = this.formatDate(newEndDate);
+                if (
+                    this.formattedEndDate <= this.formattedToday &&
+                    this.endDate != newEndDate
+                ) {
+                    this.endTime = this.nowTime;
+                }
+                this.$store.commit("updateEndDate", newEndDate);
+            },
+        },
+        endTime: {
+            get() {
+                return this.$store.getters.endTime;
+            },
+            set(newEndTime) {
+                this.$store.commit("updateEndTime", newEndTime);
+            },
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-.NewItemTime {
-    margin-top: 2.39rem;
-}
-
-.BeginBox,
 .EndBox {
     display: flex;
     position: relative;
-    margin-top: 0.3rem;
     p {
         padding-top: 6px;
         font-size: 16px;

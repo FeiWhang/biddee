@@ -1,22 +1,22 @@
 <template>
-    <div class="bid">
+    <div class="myitem">
         <Header />
-        <BidBody />
+        <MyItemBody />
     </div>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
-import BidBody from "@/components/Bid/BidBody.vue";
+import MyItemBody from "@/components/MyItemBody.vue";
 
 export default {
-    name: "Bid",
+    name: "MyItem",
     metaInfo: {
         titleTemplate: null,
     },
     components: {
         Header,
-        BidBody,
+        MyItemBody,
     },
 };
 </script>

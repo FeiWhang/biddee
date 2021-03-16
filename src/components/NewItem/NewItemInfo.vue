@@ -1,9 +1,16 @@
 <template>
     <div class="NewItemInfo">
         <div class="InfoBox">
-            <label for="Name">Title:</label>
+            <label for="Title">Title:</label>
             <span>
-                <input v-model.trim="name" type="text" name="Name" id="Name" />
+                <input
+                    v-model.trim="title"
+                    type="text"
+                    name="Title"
+                    id="Title"
+                    maxlength="50"
+                    placeholder="max 50 characters"
+                />
             </span>
         </div>
         <div class="InfoBox">
@@ -30,7 +37,7 @@
             <label for="MinPerBid">Minimum per bid:</label>
             <span id="MinPerBidContainer">
                 <v-select
-                    class="ma-0 pa-0 font-weight-medium"
+                    class="ma-0 pa-0"
                     v-model.number="minPerBid"
                     :items="minPerBids"
                     menu-props="auto"
@@ -52,9 +59,6 @@ export default {
     data() {
         return {
             showStartingPriceWarning: false,
-            name: "",
-            startingPrice: "",
-            minPerBid: "",
             minPerBids: [1, 5, 10, 20, 50, 100, 300, 500, 1000],
         };
     },
@@ -68,13 +72,38 @@ export default {
             }
         },
     },
+    computed: {
+        title: {
+            get() {
+                return this.$store.getters.title;
+            },
+            set(newTitle) {
+                this.$store.commit("updateTitle", newTitle);
+            },
+        },
+        startingPrice: {
+            get() {
+                return this.$store.getters.startingPrice;
+            },
+            set(newStartingPrice) {
+                this.$store.commit("updateStartingPrice", newStartingPrice);
+            },
+        },
+        minPerBid: {
+            get() {
+                return this.$store.getters.minPerBid;
+            },
+            set(newMinPerBid) {
+                this.$store.commit("updateMinPerBid", newMinPerBid);
+            },
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
 .NewItemInfo {
     row-gap: 0.5rem;
-    margin-top: 2rem;
     width: 320px;
 
     .InfoBox {

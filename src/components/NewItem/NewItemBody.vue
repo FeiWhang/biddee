@@ -2,21 +2,28 @@
     <div class="NewItemBody">
         <div class="NewItemCard">
             <h1>Create new item</h1>
-            <NewItemImage />
+            <div class="NewItemBox">
+                <div class="NewItemBox__left">
+                    <NewItemImage />
+                </div>
 
-            <div class="NewItemForm">
-                <NewItemInfo />
-                <NewItemTime />
+                <div class="NewItemBox__right">
+                    <NewItemInfo />
+                    <NewItemTime />
+                    <NewItemDescrip />
+                </div>
             </div>
+            <NewItemFooter />
         </div>
     </div>
 </template>
 
 <script>
-import NewItemImage from "@/components/Bid/NewItem/NewItemImage.vue";
 import NewItemTime from "@/components/Bid/NewItem/NewItemTime.vue";
+import NewItemImage from "@/components/Bid/NewItem/NewItemImage.vue";
 import NewItemInfo from "@/components/Bid/NewItem/NewItemInfo.vue";
-
+import NewItemDescrip from "@/components/Bid/NewItem/NewItemDescrip.vue";
+import NewItemFooter from "@/components/Bid/NewItem/NewItemFooter.vue";
 export default {
     name: "NewItemBody",
 
@@ -24,6 +31,8 @@ export default {
         NewItemImage,
         NewItemInfo,
         NewItemTime,
+        NewItemDescrip,
+        NewItemFooter,
     },
 };
 </script>
@@ -54,8 +63,9 @@ export default {
     }
 }
 
-.NewItemForm {
+.NewItemBox {
     display: flex;
-    column-gap: 2rem;
+    column-gap: 2.5rem;
+    align-items: flex-start;
 }
 </style>

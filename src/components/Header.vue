@@ -26,6 +26,14 @@
                     class="HeaderView__link"
                     active-class="active"
                     exact
+                    to="/myitem"
+                >
+                    <span>My Item</span>
+                </router-link>
+                <router-link
+                    class="HeaderView__link"
+                    active-class="active"
+                    exact
                     to="/login"
                     v-if="!this.auth.currentUser"
                 >
