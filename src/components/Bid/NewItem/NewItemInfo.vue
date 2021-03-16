@@ -1,7 +1,7 @@
 <template>
     <div class="NewItemInfo">
         <div class="InfoBox">
-            <label for="Name">Name:</label>
+            <label for="Name">Title:</label>
             <span>
                 <input v-model.trim="name" type="text" name="Name" id="Name" />
             </span>
