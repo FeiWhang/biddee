@@ -110,12 +110,14 @@ export default {
             let yy = today.getFullYear();
             this.today = today;
             this.formattedToday = dd + "/" + mm + "/" + yy;
+            this.endDate = yy + "-" + mm + "-" + dd;
             this.formattedEndDate = dd + "/" + mm + "/" + yy;
 
             let endD = new Date(today);
             endD.setTime(endD.getTime() + 60 * 60 * 1000);
-            let hrs = endD.getHours();
-            let min = endD.getMinutes();
+
+            let hrs = ("0" + endD.getHours()).slice(-2);
+            let min = ("0" + endD.getMinutes()).slice(-2);
             this.nowTime = hrs + ":" + min;
             this.endTime = hrs + ":" + min;
         },

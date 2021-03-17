@@ -7,6 +7,7 @@ const state = {
     endDate: "",
     endTime: "",
     imgDataUrl: "",
+    description: "",
 };
 
 const getters = {
@@ -16,18 +17,26 @@ const getters = {
     endDate: (state) => state.endDate,
     endTime: (state) => state.endTime,
     imgDataUrl: (state) => state.imgDataUrl,
+    description: (state) => state.description,
 };
 
 const actions = {
     createNewItem({ commit, state }) {
+        let beginAt = new Date();
+
+        let endAt = new Date(state.endDate);
+        let [hrs, min] = state.endTime.split(":");
+        endAt.setHours(hrs, min, 0);
+
         let newItem = {
             sellerID: auth.currentUser.uid,
             title: state.title,
             startingPrice: state.startingPrice,
             minPerBid: state.minPerBid,
-            endDate: state.endDate,
-            endTime: state.endTime,
+            beginAt: beginAt.toISOString(),
+            endAt: endAt.toISOString(),
             imgDataUrl: state.imgDataUrl,
+            description: state.description,
         };
 
         commit("setNewItem", newItem);
@@ -62,6 +71,9 @@ const mutations = {
     },
     updateImgDataUrl(state, newImgDataUrl) {
         state.imgDataUrl = newImgDataUrl;
+    },
+    updateDescription(state, newDescription) {
+        state.description = newDescription;
     },
 };
 

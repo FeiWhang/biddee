@@ -10,9 +10,15 @@
             round
             @click="onCheckBoxClicked"
         ></v-checkbox>
-        <p v-if="showError">
-            Please indicate that you have reviewed the above information
-        </p>
+        <div class="NewItemFooter__error">
+            <p v-if="showConfirmError">
+                * Please indicate that you have reviewed the above information
+            </p>
+            <p v-if="showBlankError">
+                * No field can be left blank
+            </p>
+        </div>
+
         <v-btn
             class="mt-3 white--text"
             color="#0e6396"
@@ -24,28 +30,49 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
     name: "NewItemFooter",
     data() {
         return {
             confirmChecked: false,
-            showError: false,
+            showConfirmError: false,
+            showBlankError: false,
         };
     },
     methods: {
         ...mapActions(["createNewItem"]),
         onCheckBoxClicked() {
-            if (this.confirmChecked && this.showError) {
-                this.showError = false;
+            if (this.confirmChecked && this.showConfirmError) {
+                this.showConfirmError = false;
             }
         },
         onCreateNewItemClicked() {
-            this.confirmChecked
-                ? this.createNewItem()
-                : (this.showError = true);
+            if (
+                this.title == "" ||
+                this.startingPrice == "" ||
+                this.minPerBid == "" ||
+                this.description == ""
+            ) {
+                this.showBlankError = true;
+            }
+            if (!this.confirmChecked) {
+                this.showConfirmError = true;
+            }
+            if (
+                this.confirmChecked &&
+                this.title != "" &&
+                this.startingPrice != "" &&
+                this.minPerBid != "" &&
+                this.description != ""
+            ) {
+                this.createNewItem();
+            }
         },
+    },
+    computed: {
+        ...mapGetters(["title", "startingPrice", "minPerBid", "description"]),
     },
 };
 </script>
@@ -54,10 +81,13 @@ export default {
 .NewItemFooter {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    &__error {
+        margin: 0;
+        margin-top: 1rem;
+    }
     p {
-        margin-top: 0.5rem;
+        margin: 0;
         color: var(--redError);
     }
 }

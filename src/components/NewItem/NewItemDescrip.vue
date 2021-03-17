@@ -3,6 +3,7 @@
         <textarea
             class="DescriptionArea"
             name="Description"
+            v-model="description"
             placeholder="Describe this item..."
             cols="35"
             rows="5"
@@ -13,6 +14,16 @@
 <script>
 export default {
     name: "NewItemDescrip",
+    computed: {
+        description: {
+            get() {
+                return this.$store.getters.description;
+            },
+            set(newDescription) {
+                this.$store.commit("updateDescription", newDescription);
+            },
+        },
+    },
 };
 </script>
 

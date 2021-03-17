@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import NewItemTime from "@/components/Bid/NewItem/NewItemTime.vue";
-import NewItemImage from "@/components/Bid/NewItem/NewItemImage.vue";
-import NewItemInfo from "@/components/Bid/NewItem/NewItemInfo.vue";
-import NewItemDescrip from "@/components/Bid/NewItem/NewItemDescrip.vue";
-import NewItemFooter from "@/components/Bid/NewItem/NewItemFooter.vue";
+import NewItemTime from "@/components/NewItem/NewItemTime.vue";
+import NewItemImage from "@/components/NewItem/NewItemImage.vue";
+import NewItemInfo from "@/components/NewItem/NewItemInfo.vue";
+import NewItemDescrip from "@/components/NewItem/NewItemDescrip.vue";
+import NewItemFooter from "@/components/NewItem/NewItemFooter.vue";
 export default {
     name: "NewItemBody",
 
