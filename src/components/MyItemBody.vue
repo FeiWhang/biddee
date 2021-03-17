@@ -13,6 +13,13 @@
                 </div>
             </div>
         </section>
+        <section class="MyItemBody__currentItem">
+            <div class="layout">
+                <div class="CurrentItem">
+                    <h2>My item</h2>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
@@ -39,5 +46,11 @@ export default {
     flex-direction: column;
     row-gap: 1rem;
     align-items: center;
+}
+
+.CurrentItem {
+    h2 {
+        text-align: left;
+    }
 }
 </style>

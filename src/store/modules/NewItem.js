@@ -45,11 +45,32 @@ const actions = {
 
 const mutations = {
     setNewItem(state, newItem) {
-        db.ref("items/").push(newItem, (error) => {
-            if (error) {
-                alert("Could not create new item: " + error);
+        // get new item ID
+        let itemID = db
+            .ref("items/")
+            .push()
+            .getKey();
+
+        // set new item to items/
+        db.ref("items/")
+            .child(itemID)
+            .set(newItem, (error) => {
+                if (error) {
+                    alert("Could not create new item: " + error);
+                } else {
+                    router.push("/myitem/new/success");
+                }
+            });
+
+        // add new item ID to users/
+        let userRef = db.ref("users/").child(auth.currentUser.uid);
+        userRef.child("myItems").once("value", (snapshot) => {
+            if (snapshot.exists()) {
+                let myCurrentItems = snapshot.val();
+                myCurrentItems.push(itemID);
+                userRef.child("myItems").set(myCurrentItems);
             } else {
-                router.push("/myitem/new/success");
+                userRef.child("myItems").set([itemID]);
             }
         });
     },
