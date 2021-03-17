@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import authentication from "./modules/authentication";
 import NewItem from "./modules/NewItem";
+import EditItem from "./modules/EditItem";
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
     modules: {
         authentication,
         NewItem,
+        EditItem,
     },
 });
 

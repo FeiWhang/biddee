@@ -97,6 +97,7 @@ export default {
     p {
         margin: 0;
         color: rgb(216, 68, 88);
+        font-weight: 800;
     }
 }
 </style>

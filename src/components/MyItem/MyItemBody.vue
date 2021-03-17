@@ -6,7 +6,7 @@
             max-width="720px"
             transition="dialog-transition"
         >
-            <div class="NewItemDialogContainer">
+            <div class="DialogContainer">
                 <v-icon
                     large
                     color="rgb(216, 68, 88)"
@@ -16,6 +16,24 @@
                     mdi-close
                 </v-icon>
                 <NewItemCard />
+            </div>
+        </v-dialog>
+        <v-dialog
+            v-model="showEditItemDialog"
+            persistent
+            max-width="400px"
+            transition="dialog-transition"
+        >
+            <div class="DialogContainer">
+                <v-icon
+                    large
+                    color="rgb(216, 68, 88)"
+                    class="CloseDialog"
+                    @click="updateShowEditItemDialog(false)"
+                >
+                    mdi-close
+                </v-icon>
+                <EditItemCard />
             </div>
         </v-dialog>
         <section class="MyItemBody__newItem" v-if="!myItems.length">
@@ -65,9 +83,19 @@
                                     ></v-img>
                                 </div>
                             </template>
-                            <template v-slot:[`item.action`]="{}">
+                            <template v-slot:[`item.action`]="{ item }">
                                 <div class="p-2">
-                                    <v-btn rounded>
+                                    <v-btn
+                                        rounded
+                                        @click="
+                                            onEditItemClicked({
+                                                id: item.id,
+                                                editTitle: item.fullTitle,
+                                                editDescription:
+                                                    item.description,
+                                            })
+                                        "
+                                    >
                                         <v-icon left>
                                             mdi-pencil
                                         </v-icon>
@@ -86,11 +114,40 @@
 <script>
 import { db, auth } from "@/firebase";
 import NewItemCard from "@/components/NewItem/NewItemCard";
+import EditItemCard from "@/components/MyItem/EditItemCard";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
-    name: "BidBody",
-    components: { NewItemCard },
-
+    name: "MyItemBody",
+    components: { NewItemCard, EditItemCard },
+    methods: {
+        ...mapMutations([
+            "updateEditID",
+            "updateEditTitle",
+            "updateEditDescription",
+            "updateShowEditItemDialog",
+        ]),
+        onEditItemClicked(info) {
+            this.updateShowEditItemDialog(true);
+            this.updateEditID(info.id);
+            this.updateEditTitle(info.editTitle);
+            this.updateEditDescription(info.editDescription);
+        },
+    },
+    computed: {
+        ...mapGetters(["showEditItemDialog"]),
+        showEditItemDialog: {
+            get() {
+                return this.$store.getters.showEditItemDialog;
+            },
+            set(newShowEditItemDialog) {
+                this.$store.commit(
+                    "updateShowEditItemDialog",
+                    newShowEditItemDialog
+                );
+            },
+        },
+    },
     data() {
         return {
             showNewItemDialog: false,
@@ -132,7 +189,6 @@ export default {
                 if (snapshot.exists()) {
                     snapshot.forEach((childSnapshot) => {
                         let itemID = childSnapshot.val();
-
                         db.ref("items/")
                             .child(itemID)
                             .on("value", (ss) => {
@@ -143,9 +199,12 @@ export default {
                                         : itemData.title;
 
                                 let myItem = {
+                                    id: itemID,
                                     title: title,
+                                    fullTitle: itemData.title,
                                     currentPrice: itemData.currentPrice,
                                     imgDataUrl: itemData.imgDataUrl,
+                                    description: itemData.description,
                                 };
 
                                 let now = new Date();
@@ -172,7 +231,15 @@ export default {
                                     ":" +
                                     min;
 
-                                this.myItems.push(myItem);
+                                this.myItems.length >= snapshot.val().length
+                                    ? this.myItems.forEach((item) => {
+                                          if (item.id == itemID) {
+                                              item.title = myItem.title;
+                                              item.description =
+                                                  myItem.description;
+                                          }
+                                      })
+                                    : this.myItems.push(myItem);
                             });
                     });
                 } else {
@@ -216,7 +283,7 @@ export default {
     }
 }
 
-.NewItemDialogContainer {
+.DialogContainer {
     position: relative;
 
     .CloseDialog {

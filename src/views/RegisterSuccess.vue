@@ -4,11 +4,7 @@
         <div class="registersuccess__body">
             <img src="@/assets/img/check.png" alt="" />
             <h1>You have successfully registered !</h1>
-            <LinkGo
-                to="/bidding"
-                title="Start bidding now"
-                elemColor="#0e6396"
-            />
+            <LinkGo to="/bid" title="Start bidding now" elemColor="#0e6396" />
         </div>
     </div>
 </template>

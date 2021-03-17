@@ -4,8 +4,8 @@
             <div class="layout">
                 <div class="Hero">
                     <div class="Hero__quote">
-                        <h1>Let it be</h1>
-                        <h1>The Bidding War</h1>
+                        <h1>Online</h1>
+                        <h1>Bidding Platform</h1>
                         <LinkGo
                             to="/register"
                             title="Start now"
