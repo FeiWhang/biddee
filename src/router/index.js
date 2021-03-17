@@ -26,22 +26,7 @@ const routes = [
             requiresAuth: true,
         },
     },
-    {
-        path: "/myitem/new",
-        name: "NewItem",
-        component: () => import("@/views/NewItem.vue"),
-        meta: {
-            requiresAuth: true,
-        },
-    },
-    {
-        path: "/myitem/new/success",
-        name: "NewItemSuccess",
-        component: () => import("@/views/NewItemSuccess.vue"),
-        meta: {
-            requiresAuth: true,
-        },
-    },
+
     {
         path: "/login",
         name: "Login",

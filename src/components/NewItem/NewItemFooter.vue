@@ -53,7 +53,8 @@ export default {
                 this.title == "" ||
                 this.startingPrice == "" ||
                 this.minPerBid == "" ||
-                this.description == ""
+                this.description == "" ||
+                this.imgDataUrl == ""
             ) {
                 this.showBlankError = true;
             }
@@ -65,14 +66,21 @@ export default {
                 this.title != "" &&
                 this.startingPrice != "" &&
                 this.minPerBid != "" &&
-                this.description != ""
+                this.description != "" &&
+                this.imgDataUrl != ""
             ) {
                 this.createNewItem();
             }
         },
     },
     computed: {
-        ...mapGetters(["title", "startingPrice", "minPerBid", "description"]),
+        ...mapGetters([
+            "title",
+            "startingPrice",
+            "minPerBid",
+            "description",
+            "imgDataUrl",
+        ]),
     },
 };
 </script>
@@ -88,7 +96,7 @@ export default {
     }
     p {
         margin: 0;
-        color: var(--redError);
+        color: rgb(216, 68, 88);
     }
 }
 </style>

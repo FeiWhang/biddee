@@ -1,5 +1,6 @@
 import { db, auth } from "@/firebase";
 import router from "@/router/index";
+
 const state = {
     title: "",
     startingPrice: "",
@@ -32,6 +33,8 @@ const actions = {
             sellerID: auth.currentUser.uid,
             title: state.title,
             startingPrice: state.startingPrice,
+            // current is starting at create
+            currentPrice: state.startingPrice,
             minPerBid: state.minPerBid,
             beginAt: beginAt.toISOString(),
             endAt: endAt.toISOString(),
@@ -58,7 +61,7 @@ const mutations = {
                 if (error) {
                     alert("Could not create new item: " + error);
                 } else {
-                    router.push("/myitem/new/success");
+                    router.go(router.currentRoute);
                 }
             });
 

@@ -7,7 +7,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import MyItemBody from "@/components/MyItemBody.vue";
+import MyItemBody from "@/components/MyItem/MyItemBody.vue";
 
 export default {
     name: "MyItem",

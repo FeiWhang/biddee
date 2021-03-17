@@ -49,7 +49,7 @@ export default {
 .ImageBox {
     overflow: hidden;
     border-radius: 8px;
-    background-color: var(--blueHover);
+    background-color: #f5f8fc;
     width: 300px;
     height: 300px;
     display: flex;

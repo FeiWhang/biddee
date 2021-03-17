@@ -31,17 +31,17 @@ export default {
 .NewItemDescrip {
     display: flex;
     align-self: flex-start;
-    justify-content: start;
+    justify-content: flex-start;
 }
 .DescriptionArea {
     outline: 0;
     margin-top: 0.8rem;
     padding: 8px 10px;
     border-radius: 8px;
-    background-color: var(--greyHover);
+    background-color: #f3f3f3;
     resize: none;
 }
 .DescriptionArea:focus {
-    box-shadow: inset 0 0 3px var(--midBlue);
+    box-shadow: inset 0 0 3px #1080c5;
 }
 </style>

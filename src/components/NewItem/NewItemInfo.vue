@@ -128,14 +128,14 @@ export default {
         padding: 8px 24px;
         font-size: 16px;
         border-radius: 16px;
-        background-color: var(--greyHover);
+        background-color: #f3f3f3;
         border: none;
         outline: none;
         width: 100%;
     }
 
     input:focus {
-        box-shadow: inset 0 0 3px var(--midBlue);
+        box-shadow: inset 0 0 3px #1080c5;
     }
 
     input::-webkit-outer-spin-button,

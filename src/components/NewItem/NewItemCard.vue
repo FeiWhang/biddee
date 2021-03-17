@@ -1,20 +1,18 @@
 <template>
-    <div class="NewItemBody">
-        <div class="NewItemCard">
-            <h1>Create new item</h1>
-            <div class="NewItemBox">
-                <div class="NewItemBox__left">
-                    <NewItemImage />
-                </div>
-
-                <div class="NewItemBox__right">
-                    <NewItemInfo />
-                    <NewItemTime />
-                    <NewItemDescrip />
-                </div>
+    <div class="NewItemCard">
+        <h1>Create new item</h1>
+        <div class="NewItemBox">
+            <div class="NewItemBox__left">
+                <NewItemImage />
             </div>
-            <NewItemFooter />
+
+            <div class="NewItemBox__right">
+                <NewItemInfo />
+                <NewItemTime />
+                <NewItemDescrip />
+            </div>
         </div>
+        <NewItemFooter />
     </div>
 </template>
 
@@ -25,7 +23,7 @@ import NewItemInfo from "@/components/NewItem/NewItemInfo.vue";
 import NewItemDescrip from "@/components/NewItem/NewItemDescrip.vue";
 import NewItemFooter from "@/components/NewItem/NewItemFooter.vue";
 export default {
-    name: "NewItemBody",
+    name: "NewItemCard",
 
     components: {
         NewItemImage,
@@ -38,14 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewItemBody {
-    display: flex;
-    justify-content: center;
-    width: var(--layoutWidth);
-    margin: 0 auto;
-    margin-top: 8rem;
-}
-
 .NewItemCard {
     display: flex;
     flex-direction: column;
@@ -61,6 +51,7 @@ export default {
         margin-bottom: 3rem;
         font-size: 32px;
     }
+    background-color: white;
 }
 
 .NewItemBox {
