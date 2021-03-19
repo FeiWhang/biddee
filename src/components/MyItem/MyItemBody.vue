@@ -11,7 +11,7 @@
                     large
                     color="rgb(216, 68, 88)"
                     class="CloseDialog"
-                    @click="updateShowNewItemDialog(false)"
+                    @click="closeShowNewItemDialog()"
                 >
                     mdi-close
                 </v-icon>
@@ -36,26 +36,13 @@
                 <EditItemCard />
             </div>
         </v-dialog>
-        <section class="MyItemBody__newItem" v-if="!myItems.length">
-            <div class="layout">
-                <div class="NewItem">
-                    <h2>Get started with your first item now !</h2>
-                    <v-btn rounded @click="updateShowNewItemDialog(true)">
-                        Create new item
 
-                        <v-icon right>
-                            mdi-plus
-                        </v-icon>
-                    </v-btn>
-                </div>
-            </div>
-        </section>
-        <section class="MyItemBody__currentItem" v-if="myItems.length">
+        <section class="MyItemBody__currentItem">
             <div class="layout">
                 <div class="CurrentItem">
                     <div class="CurrentItem__header">
                         <h2>My item</h2>
-                        <v-btn rounded @click="updateShowNewItemDialog(true)">
+                        <v-btn rounded @click="openNewItemDialog()">
                             Create new item
 
                             <v-icon right>
@@ -70,6 +57,7 @@
                             :items-per-page="5"
                             :sort-by.sync="sortBy"
                             :sort-desc.sync="sortDesc"
+                            no-data-text="No item to show, create your first item now !"
                             class="elevation-1 mt-8"
                         >
                             <template v-slot:[`item.imgDataUrl`]="{ item }">
@@ -103,6 +91,18 @@
                                     </v-btn>
                                 </div>
                             </template>
+                            <template v-slot:[`item.status`]="{ item }">
+                                <v-chip
+                                    :color="
+                                        item.status == 'closed'
+                                            ? 'rgb(216, 68, 88)'
+                                            : 'rgb(64, 163, 63)'
+                                    "
+                                    dark
+                                >
+                                    {{ item.status }}
+                                </v-chip>
+                            </template>
                         </v-data-table>
                     </div>
                 </div>
@@ -126,7 +126,8 @@ export default {
             "updateEditTitle",
             "updateEditDescription",
             "updateShowEditItemDialog",
-            "updateShowNewItemDialog",
+            "openNewItemDialog",
+            "closeShowNewItemDialog",
         ]),
         onEditItemClicked(info) {
             this.updateShowEditItemDialog(true);
@@ -227,7 +228,7 @@ export default {
                                     mm +
                                     "/" +
                                     yy +
-                                    " " +
+                                    " at " +
                                     hrs +
                                     ":" +
                                     min;

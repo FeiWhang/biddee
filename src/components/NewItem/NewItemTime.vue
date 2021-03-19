@@ -96,7 +96,15 @@ export default {
             return maxDate.toISOString();
         },
         minEndTime() {
-            if (this.formattedEndDate <= this.formattedToday) {
+            let [ddT, mmT, yyT] = this.formattedToday.split("/");
+            let todayD = new Date(yyT, mmT, ddT);
+            let [ddE, mmE, yyE] = this.formattedEndDate.split("/");
+            let endD = new Date(yyE, mmE, ddE);
+
+            console.log(todayD);
+            console.log(endD);
+
+            if (todayD >= endD) {
                 return this.nowTime;
             } else {
                 return "";

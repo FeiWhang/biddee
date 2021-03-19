@@ -63,6 +63,13 @@ const mutations = {
                     alert("Could not create new item: " + error);
                 } else {
                     state.showNewItemDialog = false;
+                    state.title = "";
+                    state.startingPrice = "";
+                    state.minPerBid = "";
+                    state.endDate = "";
+                    state.endTime = "";
+                    state.imgDataUrl = "";
+                    state.description = "";
                 }
             });
 
@@ -100,8 +107,11 @@ const mutations = {
     updateDescription(state, newDescription) {
         state.description = newDescription;
     },
-    updateShowNewItemDialog(state, newShowNewItemDialog) {
-        state.showNewItemDialog = newShowNewItemDialog;
+    openNewItemDialog(state) {
+        state.showNewItemDialog = true;
+    },
+    closeShowNewItemDialog(state) {
+        state.showNewItemDialog = false;
     },
 };
 
