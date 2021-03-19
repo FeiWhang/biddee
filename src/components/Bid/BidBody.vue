@@ -5,15 +5,21 @@
                 <CurrentBid />
             </div>
         </section>
+        <section class="BidBody__allBid">
+            <div class="layout">
+                <AllBid />
+            </div>
+        </section>
     </div>
 </template>
 
 <script>
 import CurrentBid from "@/components/Bid/CurrentBid";
+import AllBid from "@/components/Bid/AllBid";
 
 export default {
     name: "BidBody",
-    components: { CurrentBid },
+    components: { CurrentBid, AllBid },
 };
 </script>
 
@@ -22,7 +28,7 @@ export default {
     .layout {
         width: var(--layoutWidth);
         margin: 0 auto;
-        padding: 6rem 0;
+        padding: 4rem 0;
     }
     &__currentBid {
         .layout {

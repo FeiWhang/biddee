@@ -139,17 +139,6 @@ export default {
     },
     computed: {
         ...mapGetters(["showEditItemDialog", "showNewItemDialog"]),
-        showEditItemDialog: {
-            get() {
-                return this.$store.getters.showEditItemDialog;
-            },
-            set(newShowEditItemDialog) {
-                this.$store.commit(
-                    "updateShowEditItemDialog",
-                    newShowEditItemDialog
-                );
-            },
-        },
     },
     data() {
         return {

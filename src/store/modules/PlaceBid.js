@@ -1,10 +1,21 @@
-const state = {};
+const state = {
+    showPlaceBidDialog: false,
+};
 
-const getters = {};
+const getters = {
+    showPlaceBidDialog: (state) => state.showPlaceBidDialog,
+};
 
 const actions = {};
 
-const mutations = {};
+const mutations = {
+    openShowPlaceBidDialog(state) {
+        state.showPlaceBidDialog = true;
+    },
+    closeShowPlaceBidDialog(state) {
+        state.showPlaceBidDialog = false;
+    },
+};
 
 export default {
     state,

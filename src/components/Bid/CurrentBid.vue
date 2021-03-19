@@ -1,11 +1,11 @@
 <template>
     <div class="CurrentBid">
-        <h2>On going Bid</h2>
+        <h2>My current bid</h2>
         <div class="CurrentBid__showcase">
             <v-data-table
                 :headers="headers"
                 :items="currentBids"
-                :items-per-page="3"
+                :items-per-page="5"
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 no-data-text="No on going bid to show, place your bid now !"
@@ -19,7 +19,7 @@
                             height="120px"
                             width="120px"
                             class="mt-2 mb-2"
-                            id="itemIMG"
+                            id="currentBidIMG"
                         ></v-img>
                     </div>
                 </template>
@@ -101,5 +101,10 @@ export default {
     h2 {
         text-align: left;
     }
+}
+
+#currentBidIMG {
+    border-radius: 4px;
+    box-shadow: 0 0 2px #8d8d8d;
 }
 </style>
