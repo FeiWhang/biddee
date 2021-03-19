@@ -53,6 +53,7 @@ export default {
     width: 300px;
     height: 300px;
     display: flex;
+    box-shadow: 0 0 3px #e1e1e1;
     img {
         margin: auto;
     }

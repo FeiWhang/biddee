@@ -1,7 +1,7 @@
 import { db, auth } from "@/firebase";
-import router from "@/router/index";
 
 const state = {
+    showNewItemDialog: false,
     title: "",
     startingPrice: "",
     minPerBid: "",
@@ -12,6 +12,7 @@ const state = {
 };
 
 const getters = {
+    showNewItemDialog: (state) => state.showNewItemDialog,
     title: (state) => state.title,
     startingPrice: (state) => state.startingPrice,
     minPerBid: (state) => state.minPerBid,
@@ -61,7 +62,7 @@ const mutations = {
                 if (error) {
                     alert("Could not create new item: " + error);
                 } else {
-                    router.go(router.currentRoute);
+                    state.showNewItemDialog = false;
                 }
             });
 
@@ -98,6 +99,9 @@ const mutations = {
     },
     updateDescription(state, newDescription) {
         state.description = newDescription;
+    },
+    updateShowNewItemDialog(state, newShowNewItemDialog) {
+        state.showNewItemDialog = newShowNewItemDialog;
     },
 };
 

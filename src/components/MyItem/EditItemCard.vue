@@ -45,6 +45,7 @@ export default {
         onDialogEditClicked() {
             if (this.editTitle == "" || this.editDescription == "") {
                 this.showEditError = true;
+                return;
             }
             this.$store.commit("setEditItem");
             this.$store.commit("updateShowEditItemDialog");

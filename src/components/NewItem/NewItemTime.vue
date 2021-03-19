@@ -62,7 +62,7 @@
                         class="ml-4"
                         :no-title="true"
                         elevation="8"
-                        width="308px"
+                        width="288px"
                     ></v-time-picker>
                 </v-scale-transition>
             </div>

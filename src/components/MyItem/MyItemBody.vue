@@ -11,7 +11,7 @@
                     large
                     color="rgb(216, 68, 88)"
                     class="CloseDialog"
-                    @click="showNewItemDialog = false"
+                    @click="updateShowNewItemDialog(false)"
                 >
                     mdi-close
                 </v-icon>
@@ -40,7 +40,7 @@
             <div class="layout">
                 <div class="NewItem">
                     <h2>Get started with your first item now !</h2>
-                    <v-btn rounded @click="showNewItemDialog = true">
+                    <v-btn rounded @click="updateShowNewItemDialog(true)">
                         Create new item
 
                         <v-icon right>
@@ -55,7 +55,7 @@
                 <div class="CurrentItem">
                     <div class="CurrentItem__header">
                         <h2>My item</h2>
-                        <v-btn rounded @click="showNewItemDialog = true">
+                        <v-btn rounded @click="updateShowNewItemDialog(true)">
                             Create new item
 
                             <v-icon right>
@@ -126,6 +126,7 @@ export default {
             "updateEditTitle",
             "updateEditDescription",
             "updateShowEditItemDialog",
+            "updateShowNewItemDialog",
         ]),
         onEditItemClicked(info) {
             this.updateShowEditItemDialog(true);
@@ -135,7 +136,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(["showEditItemDialog"]),
+        ...mapGetters(["showEditItemDialog", "showNewItemDialog"]),
         showEditItemDialog: {
             get() {
                 return this.$store.getters.showEditItemDialog;
@@ -150,7 +151,6 @@ export default {
     },
     data() {
         return {
-            showNewItemDialog: false,
             headers: [
                 {
                     text: "Images",
@@ -193,6 +193,7 @@ export default {
                             .child(itemID)
                             .on("value", (ss) => {
                                 let itemData = ss.val();
+                                if (itemData == null) return;
                                 let title =
                                     itemData.title.length >= 25
                                         ? itemData.title.slice(0, 24) + "..."
@@ -217,8 +218,8 @@ export default {
                                 let dd = end.getDate();
                                 let mm = end.getMonth();
                                 let yy = end.getFullYear();
-                                let hrs = end.getHours();
-                                let min = end.getMinutes();
+                                let hrs = ("0" + end.getHours()).slice(-2);
+                                let min = ("0" + end.getMinutes()).slice(-2);
 
                                 myItem.endAt =
                                     dd +
@@ -231,15 +232,25 @@ export default {
                                     ":" +
                                     min;
 
-                                this.myItems.length >= snapshot.val().length
-                                    ? this.myItems.forEach((item) => {
-                                          if (item.id == itemID) {
-                                              item.title = myItem.title;
-                                              item.description =
-                                                  myItem.description;
-                                          }
-                                      })
-                                    : this.myItems.push(myItem);
+                                if (
+                                    this.myItems.length >= snapshot.val().length
+                                ) {
+                                    this.myItems.forEach((item) => {
+                                        if (item.id == itemID) {
+                                            item.title = myItem.title;
+                                            item.description =
+                                                myItem.description;
+                                            item.currentPrice =
+                                                myItem.currentPrice;
+                                        }
+                                    });
+                                } else {
+                                    let idExist = false;
+                                    this.myItems.forEach((item) => {
+                                        if (item.id == itemID) idExist = true;
+                                    });
+                                    if (!idExist) this.myItems.push(myItem);
+                                }
                             });
                     });
                 } else {
