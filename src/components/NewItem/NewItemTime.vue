@@ -101,9 +101,6 @@ export default {
             let [ddE, mmE, yyE] = this.formattedEndDate.split("/");
             let endD = new Date(yyE, mmE, ddE);
 
-            console.log(todayD);
-            console.log(endD);
-
             if (todayD >= endD) {
                 return this.nowTime;
             } else {

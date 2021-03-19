@@ -62,12 +62,17 @@ const mutations = {
                 if (error) {
                     alert("Could not create new item: " + error);
                 } else {
+                    let endD = new Date();
+                    endD.setTime(endD.getTime() + 60 * 60 * 1000);
+                    let hrs = ("0" + endD.getHours()).slice(-2);
+                    let min = ("0" + endD.getMinutes()).slice(-2);
+
                     state.showNewItemDialog = false;
                     state.title = "";
                     state.startingPrice = "";
                     state.minPerBid = "";
                     state.endDate = "";
-                    state.endTime = "";
+                    state.endTime = hrs + ":" + min;
                     state.imgDataUrl = "";
                     state.description = "";
                 }

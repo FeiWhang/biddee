@@ -68,6 +68,7 @@
                                         height="120px"
                                         width="120px"
                                         class="mt-2 mb-2"
+                                        id="itemIMG"
                                     ></v-img>
                                 </div>
                             </template>
@@ -305,5 +306,10 @@ export default {
         right: 26px;
         padding: 4px;
     }
+}
+
+#itemIMG {
+    border-radius: 4px;
+    box-shadow: 0 0 2px #8d8d8d;
 }
 </style>
