@@ -21,6 +21,7 @@ export default {
                 "--midBlue": "#1080c5",
                 "--darkBlue": "#0e6396",
                 "--blueHover": "#f5f8fc",
+                "--greenHover": "#e8ffe6",
                 "--greyHover": "#f3f3f3",
                 "--layoutWidth": "1080px",
                 "--redError": "rgb(216, 68, 88)",
