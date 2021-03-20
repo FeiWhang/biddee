@@ -2,8 +2,8 @@
     <div class="AllBidShowcase">
         <v-card
             elevation="2"
-            v-for="(allBid, i) in allBids"
-            :key="i"
+            v-for="allBid in allBids"
+            :key="allBid.id"
             width="300"
         >
             <v-img height="300" :src="allBid.imgDataUrl"></v-img>
@@ -13,7 +13,7 @@
             </v-card-subtitle>
 
             <v-card-text align="center"
-                ><CountDown :endAt="allBid.endAt"
+                ><CountDown :endAt="allBid.endAt" :id="allBid.id"
             /></v-card-text>
 
             <v-divider class="mx-4"></v-divider>
@@ -34,6 +34,7 @@
 
 <script>
 import { db, auth } from "@/firebase";
+import { mapGetters } from "vuex";
 import CountDown from "@/components/CountDown";
 
 export default {
@@ -44,7 +45,19 @@ export default {
             allBids: [],
         };
     },
-
+    watch: {
+        idEnded: function(newIdEnded) {
+            console.log("new ending id: " + newIdEnded);
+            this.allBids.forEach((allBid, index, obj) => {
+                if (allBid.id == newIdEnded) {
+                    obj.splice(index, 1);
+                }
+            });
+        },
+    },
+    computed: {
+        ...mapGetters(["idEnded"]),
+    },
     mounted() {
         // load myitems keys from users ref
         db.ref("items/").on("value", (snapshot) => {
@@ -83,13 +96,13 @@ export default {
                         newAllBids.push(allBid);
                     }
                 });
+
+                newAllBids.sort((a, b) => (a.endAt > b.endAt ? 1 : -1));
                 this.allBids = newAllBids;
             } else {
                 console.log("No available for bidding found");
             }
         });
-        // sort by ending
-        this.allBids.sort((a, b) => (a.endAt > b.endAt ? 1 : -1));
     },
 };
 </script>

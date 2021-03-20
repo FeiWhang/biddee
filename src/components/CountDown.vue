@@ -23,9 +23,10 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
     name: "CountDown",
-    props: ["endAt"],
+    props: ["endAt", "id"],
 
     data() {
         return {
@@ -56,6 +57,7 @@ export default {
         this.showRemaining();
     },
     methods: {
+        ...mapMutations(["changeIDToEnded"]),
         // from: https://github.com/tyler-morales/countdown
         formatNum: (num) => (num < 10 ? "0" + num : num),
         showRemaining() {
@@ -66,6 +68,7 @@ export default {
                     clearInterval(TIMER);
                     this.expired = true;
                     this.loaded = true;
+                    this.changeIDToEnded(this.id);
                     return;
                 }
                 const DAYS = Math.floor(DISTANCE / this._days);

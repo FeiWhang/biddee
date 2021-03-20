@@ -4,6 +4,7 @@ import authentication from "./modules/authentication";
 import NewItem from "./modules/NewItem";
 import EditItem from "./modules/EditItem";
 import PlaceBid from "./modules/PlaceBid";
+import CountDown from "./modules/CountDown";
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
         NewItem,
         EditItem,
         PlaceBid,
+        CountDown,
     },
 });
 
