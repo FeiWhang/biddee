@@ -90,8 +90,8 @@ export default {
                         (itemData.sellerID != auth.currentUser.uid)
                     ) {
                         let title =
-                            itemData.title.length >= 20
-                                ? itemData.title.slice(0, 19) + "..."
+                            itemData.title.length >= 23
+                                ? itemData.title.slice(0, 22).trim() + "..."
                                 : itemData.title;
                         let description =
                             itemData.description.length >= 33

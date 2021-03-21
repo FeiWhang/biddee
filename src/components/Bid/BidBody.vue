@@ -1,10 +1,5 @@
 <template>
     <div class="BidBody">
-        <section class="BidBody__currentBid">
-            <div class="layout">
-                <CurrentBid />
-            </div>
-        </section>
         <section class="BidBody__allBid">
             <div class="layout">
                 <AllBid />
@@ -14,12 +9,11 @@
 </template>
 
 <script>
-import CurrentBid from "@/components/Bid/CurrentBid";
 import AllBid from "@/components/Bid/AllBid";
 
 export default {
     name: "BidBody",
-    components: { CurrentBid, AllBid },
+    components: { AllBid },
 };
 </script>
 
