@@ -26,7 +26,8 @@
                     :style="
                         showStartingPriceWarning
                             ? {
-                                  'box-shadow': 'inset 0 0 3px var(--redError)',
+                                  'box-shadow':
+                                      'inset 0 0 3px rgb(216, 68, 88)',
                               }
                             : {}
                     "

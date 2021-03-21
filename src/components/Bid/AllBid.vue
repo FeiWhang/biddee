@@ -3,7 +3,7 @@
         <v-dialog
             v-model="showPlaceBidDialog"
             persistent
-            max-width="400px"
+            max-width="800px"
             transition="dialog-transition"
         >
             <div class="DialogContainer">

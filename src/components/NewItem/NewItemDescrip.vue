@@ -7,6 +7,7 @@
             placeholder="Describe this item..."
             cols="35"
             rows="5"
+            maxlength="555"
         ></textarea>
     </div>
 </template>

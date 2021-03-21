@@ -21,6 +21,7 @@
                 v-model="editDescription"
                 cols="35"
                 rows="5"
+                maxlength="555"
             ></textarea>
         </div>
         <p class="EditError" v-if="showEditError">

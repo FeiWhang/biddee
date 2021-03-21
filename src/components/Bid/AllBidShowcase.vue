@@ -5,6 +5,8 @@
             v-for="allBid in allBids"
             :key="allBid.id"
             width="300"
+            @click="onItemCardClicked(allBid.id)"
+            :ripple="false"
         >
             <v-img height="300" :src="allBid.imgDataUrl"></v-img>
             <v-card-title>{{ allBid.title }}</v-card-title>
@@ -34,7 +36,7 @@
 
 <script>
 import { db, auth } from "@/firebase";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import CountDown from "@/components/CountDown";
 
 export default {
@@ -47,16 +49,28 @@ export default {
     },
     watch: {
         idEnded: function(newIdEnded) {
-            console.log("new ending id: " + newIdEnded);
             this.allBids.forEach((allBid, index, obj) => {
                 if (allBid.id == newIdEnded) {
                     obj.splice(index, 1);
+                    // if place bid dialog also opened close it
+                    // and set place bid id back to blank
+                    if (this.placeBidID == newIdEnded) {
+                        this.closeShowPlaceBidDialog();
+                        this.setPlaceBidID("");
+                    }
                 }
             });
         },
     },
     computed: {
-        ...mapGetters(["idEnded"]),
+        ...mapGetters(["idEnded", "placeBidID"]),
+    },
+    methods: {
+        ...mapMutations([
+            "closeShowPlaceBidDialog",
+            "setPlaceBidID",
+            "onItemCardClicked",
+        ]),
     },
     mounted() {
         // load myitems keys from users ref
@@ -80,8 +94,9 @@ export default {
                                 ? itemData.title.slice(0, 19) + "..."
                                 : itemData.title;
                         let description =
-                            itemData.description.length >= 35
-                                ? itemData.description.slice(0, 34) + "..."
+                            itemData.description.length >= 33
+                                ? itemData.description.slice(0, 32).trim() +
+                                  "..."
                                 : itemData.description;
 
                         let allBid = {
