@@ -12,6 +12,11 @@ const mutations = {
     changeIDToEnded(state, id) {
         console.log("ID: " + id + " is ending");
         state.idEnded = id;
+
+        if (id == state.placeBidID) {
+            state.placeBidID = "";
+            state.showPlaceBidDialog = false;
+        }
     },
 };
 
